@@ -9,6 +9,7 @@ import traceback
 import os
 from async_timeout import timeout
 from functools import partial
+from youtube_dl import YoutubeDL
 
 bot = commands.Bot(command_prefix='-')
 send_Resume = ""
