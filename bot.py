@@ -10,7 +10,6 @@ from async_timeout import timeout
 from functools import partial
 from youtube_dl import YoutubeDL
 
-TOKEN = "Mjc5NTg1MDg0Mjg4MjcwMzM2.DlVKjA.gFE8x_egcLMlVt_OpzDGg5TFBqA"
 bot = commands.Bot(command_prefix='-')
 send_Resume = ""
 sent = ""
@@ -444,4 +443,4 @@ async def on_ready():
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
-bot.run(TOKEN)
+bot.run(BOT_TOKEN)
