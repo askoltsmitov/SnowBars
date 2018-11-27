@@ -11,6 +11,7 @@ from functools import partial
 from youtube_dl import YoutubeDL
 
 bot = commands.Bot(command_prefix='-')
+BOT_TOKEN = ""
 send_Resume = ""
 sent = ""
 
