@@ -226,9 +226,9 @@ class Music:
 		await ctx.message.delete()
 		if not channel:
 			try:
-				channel = bot.get_channel(channel.id)
+				channel = bot.get_channel(199459074243297281)
 			except AttributeError:
-				raise InvalidVoiceChannel('No channel to join. Please either specify a valid channel or join one.')
+				raise InvalidVoiceChannel('No channel to join. Please either specify a valid channel or join one.', delete_after=15)
 
 			vc = ctx.voice_client
 
