@@ -443,4 +443,4 @@ async def on_ready():
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
-bot.run(BOT_TOKEN)
+bot.run(process.env.BOT_TOKEN)
