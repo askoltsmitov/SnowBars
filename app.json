@@ -1,10 +1,12 @@
 {
-  "buildpacks": [
-    {
-      "url": "https://github.com/heroku/heroku-buildpack-pgbouncer"
-    },
-    {
-      "url": "heroku/python"
-    }
-  ]
+  "name": "SnowBars",
+  "description": "A Discord Music bot, hosted using Heroku.",
+  "version": "1.0.0",
+  "main": "bot.py",
+  "scripts": {
+    "start": "python bot.py"
+  },
+  "dependencies": {
+    "discord.py": "1.0.0a0"
+  }
 }
