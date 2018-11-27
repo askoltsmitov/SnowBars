@@ -1,4 +1,2 @@
 pip install -U yarl
-https://github.com/Rapptz/discord.py/archive/rewrite.zip#egg=discord.py[voice]
--U opuslib
--U youtube_dl
+
