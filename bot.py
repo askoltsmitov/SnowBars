@@ -10,8 +10,6 @@ import os
 from async_timeout import timeout
 from functools import partial
 
-discord.opus.load_opus('opus')
-
 bot = commands.Bot(command_prefix='-')
 send_Resume = ""
 sent = ""
