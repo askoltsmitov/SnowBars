@@ -1,3 +1,3 @@
-yarl==1.2.6
+yarl
 https://github.com/Rapptz/discord.py/archive/rewrite.zip#egg=discord.py[voice]
 youtube-dl
