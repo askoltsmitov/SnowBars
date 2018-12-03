@@ -472,14 +472,12 @@ async def on_ready():
 	weather_cry = ""
 
 	# Нахождение температуры
-	def job():
-		w = fc.get_weather_at(times)
-		start = str((w.get_temperature('celsius'))).find(" ")
-		end = str((w.get_temperature('celsius'))).find(",")
-		temp = str((w.get_temperature('celsius')))[start:end-1]
-		print(temp)
-		channel = bot.get_channel(199459074243297280)
-		await channel.send("Температура на завтра: " + temp + " C" + weather_cry)
+	w = fc.get_weather_at(times)
+	start = str((w.get_temperature('celsius'))).find(" ")
+	end = str((w.get_temperature('celsius'))).find(",")
+	temp = str((w.get_temperature('celsius')))[start:end-1]
+	print(temp)
+	channel = bot.get_channel(199459074243297280)
 
 	if fc.will_be_rainy_at(times):
 		weather_cry = " , возможен :cloud_rain:"
@@ -489,7 +487,7 @@ async def on_ready():
 		weather_cry = " , возможен :cloud_snow:"
 		print("Снег")
 
-	schedule.every().day.at("00:35").do(job)
+	schedule.every().day.at("00:40").do(await channel.send("Температура на завтра: " + temp + " C" + weather_cry))
 
 	while True:
 		schedule.run_pending()
