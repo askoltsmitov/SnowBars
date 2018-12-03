@@ -467,7 +467,9 @@ class Mute:
 
 changeBool = False
 
-if changeBool == True:
+def changeBool():
+	changeBool == True
+	
 	@bot.event
 	async def on_ready():
 		# Нахождение температуры
@@ -491,7 +493,7 @@ bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
 bot.run(os.getenv('TOKEN'))
 
-schedule.every().day.at("01:40").do(changeBool=True)
+schedule.every().day.at("01:40").do(changeBool)
 
 while True:
 	schedule.run_pending()
