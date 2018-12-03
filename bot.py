@@ -467,9 +467,7 @@ class Mute:
 
 changeBool = False
 
-def changeBool():
-	changeBool == True
-	
+def changeBool():	
 	@bot.event
 	async def on_ready():
 		# Нахождение температуры
