@@ -465,11 +465,11 @@ class Mute:
 		role = discord.utils.get(member.guild.roles, name="Muted")
 		await member.remove_roles(role)
 
-changeBool = False
-
-def changeBool():	
+def changeWeather():
+	print("Test 1")
 	@bot.event
 	async def on_ready():
+		print("Test 2")
 		# Нахождение температуры
 		weather_cry = ""
 		w = fc.get_weather_at(times)
@@ -491,7 +491,7 @@ bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
 bot.run(os.getenv('TOKEN'))
 
-schedule.every().day.at("02:02").do(changeBool)
+schedule.every().day.at("02:10").do(changeWeather)
 
 while True:
 	schedule.run_pending()
