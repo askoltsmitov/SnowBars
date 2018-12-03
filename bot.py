@@ -1,6 +1,10 @@
 from __future__ import unicode_literals
 from discord.ext import commands
 import discord
+import pyowm
+import schedule
+import time
+from pyowm import timeutils
 
 import asyncio
 import itertools
@@ -11,10 +15,15 @@ from async_timeout import timeout
 from functools import partial
 from youtube_dl import YoutubeDL
 from discord import opus
+
 OPUS_LIBS = ['libopus-0.x86.dll', 'libopus-0.x64.dll',
              'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
 
 bot = commands.Bot(command_prefix='-')
+owm = pyowm.OWM('8638c55431d913688db69d830ed8d17b', language='ru')
+
+fc = owm.daily_forecast('Angarsk,RU')
+times = timeutils.tomorrow(14)
 send_Resume = ""
 sent = ""
 
@@ -459,6 +468,32 @@ class Mute:
 @bot.event
 async def on_ready():
 	print('We have logged in as {0.user}'.format(bot))
+
+	weather_cry = ""
+
+	# Нахождение температуры
+	def job():
+		w = fc.get_weather_at(times)
+		start = str((w.get_temperature('celsius'))).find(" ")
+		end = str((w.get_temperature('celsius'))).find(",")
+		temp = str((w.get_temperature('celsius')))[start:end-1]
+		print(temp)
+		channel = bot.get_channel(199459074243297280)
+		await channel.send("Температура на завтра: " + temp + " C" + weather_cry)
+
+	if fc.will_be_rainy_at(times):
+		weather_cry = " , возможен :cloud_rain:"
+		print("Дождь")
+
+	if fc.will_be_snowy_at(times):
+		weather_cry = " , возможен :cloud_snow:"
+		print("Снег")
+
+	schedule.every().day.at("00:35").do(job)
+
+	while True:
+		schedule.run_pending()
+		time.sleep(10)
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
