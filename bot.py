@@ -483,7 +483,7 @@ async def on_ready():
 	if fc.will_be_snowy_at(times):
 		weather_cry = " , возможен :cloud_snow:"
 
-	schedule.every().day.at("23:00").do(await channel.send("Температура на завтра: " + temp + " C" + weather_cry))
+	schedule.every().day.at("01:30").do(await channel.send("Температура на завтра: " + temp + " C" + weather_cry))
 
 	while True:
 		schedule.run_pending()
