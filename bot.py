@@ -465,30 +465,34 @@ class Mute:
 		role = discord.utils.get(member.guild.roles, name="Muted")
 		await member.remove_roles(role)
 
-@bot.event
-async def on_ready():
-	print('We have logged in as {0.user}'.format(bot))
+changeBool = False
 
-	# Нахождение температуры
-	weather_cry = ""
-	w = fc.get_weather_at(times)
-	start = str((w.get_temperature('celsius'))).find(" ")
-	end = str((w.get_temperature('celsius'))).find(",")
-	temp = str((w.get_temperature('celsius')))[start:end-1]
-	channel = bot.get_channel(199459074243297280)
+if changeBool == True:
+	@bot.event
+	async def on_ready():
+		# Нахождение температуры
+		weather_cry = ""
+		w = fc.get_weather_at(times)
+		start = str((w.get_temperature('celsius'))).find(" ")
+		end = str((w.get_temperature('celsius'))).find(",")
+		temp = str((w.get_temperature('celsius')))[start:end-1]
 
-	if fc.will_be_rainy_at(times):
-		weather_cry = " , возможен :cloud_rain:"
+		if fc.will_be_rainy_at(times):
+			weather_cry = " , возможен :cloud_rain:"
 
-	if fc.will_be_snowy_at(times):
-		weather_cry = " , возможен :cloud_snow:"
+		if fc.will_be_snowy_at(times):
+			weather_cry = " , возможен :cloud_snow:"
 
-	schedule.every().day.at("01:30").do(await channel.send("Температура на завтра: " + temp + " C" + weather_cry))
+		channel = bot.get_channel(199459074243297280)
+		await channel.send("Температура на завтра: " + temp + " C" + weather_cry)
 
-	while True:
-		schedule.run_pending()
-		time.sleep(10)
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
 bot.run(os.getenv('TOKEN'))
+
+schedule.every().day.at("01:40").do(changeBool=True)
+
+while True:
+	schedule.run_pending()
+	time.sleep(10)
