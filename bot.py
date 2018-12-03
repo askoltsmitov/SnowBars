@@ -493,7 +493,7 @@ bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
 bot.run(os.getenv('TOKEN'))
 
-schedule.every().day.at("01:40").do(changeBool)
+schedule.every().day.at("02:02").do(changeBool)
 
 while True:
 	schedule.run_pending()
