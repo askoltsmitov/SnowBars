@@ -151,6 +151,8 @@ class MusicPlayer:
 		"""Our main player loop."""
 		await self.bot.wait_until_ready()
 
+		start = time.monotonic()
+
 		while not self.bot.is_closed():
 
 			self.next.clear()
@@ -176,7 +178,7 @@ class MusicPlayer:
 			self.current = source
 
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
-			self.np = await self._channel.send(f'**Сейчас играет: {i+=1}** `{source.title}` by **{source.requester}**  ''{0[0]}:{0[1]} / {time.time}'.format(divmod(source.duration, 60)))
+			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}** ' 'str(time.monotonic() - start)' '{0[0]}:{0[1]} / '.format(divmod(source.duration, 60)))
 			await self.next.wait()
 
 			# Make sure the FFmpeg process is cleaned up.
