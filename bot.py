@@ -132,6 +132,7 @@ class MusicPlayer:
 	__slots__ = ('bot', '_guild', '_channel', '_cog', 'queue', 'next', 'current', 'np', 'volume')
 
 	def __init__(self, ctx):
+		i = 0
 		self.bot = ctx.bot
 		self._guild = ctx.guild
 		self._channel = ctx.channel
@@ -151,6 +152,7 @@ class MusicPlayer:
 		await self.bot.wait_until_ready()
 
 		while not self.bot.is_closed():
+
 			self.next.clear()
 
 			try:
@@ -174,7 +176,7 @@ class MusicPlayer:
 			self.current = source
 
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
-			self.np = await self._channel.send(f'**Сейчас играет:** `{source.title}` by **{source.requester}**\n''{0[0]}m {0[1]}s'.format(divmod(source.duration, 60)))
+			self.np = await self._channel.send(f'**Сейчас играет: {i+=1}** `{source.title}` by **{source.requester}**  ''{0[0]}:{0[1]} / {time.time}'.format(divmod(source.duration, 60)))
 			await self.next.wait()
 
 			# Make sure the FFmpeg process is cleaned up.
