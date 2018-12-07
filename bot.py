@@ -175,8 +175,8 @@ class MusicPlayer:
 			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}** ' + str(time.monotonic() - start) + ' / ' + str(duration[0]) + ' ' + str(duration[1]))
 
 			msg = await self._channel.send("Хуёвый тест")
-			while self.vc.is_playing():
-				await msg.edit(self, 123)
+#			while self.vc.is_playing():
+#				await msg.edit(123)
 
 			await self.next.wait()
 
@@ -459,6 +459,8 @@ class Mute:
 		await member.add_roles(role)
 		channel = bot.get_channel(199459074243297280)
 		sent = await channel.send(embed=embed)
+		qwer = await channel.send("Привет как дела")
+		await qwer.edit("Никак")
 
 	# <--- Unmute Command --->
 	@commands.command(name='unmute')
