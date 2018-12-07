@@ -474,7 +474,7 @@ async def on_ready():
   print('We have logged in as {0.user}'.format(bot))
   channel = bot.get_channel(199459074243297280)
   msg = await channel.send("Тест")
-  await discord.Message.edit("Хуест")
+  await msg.edit(content = "Хуест")
 
 
 bot.add_cog(Music(bot))
