@@ -1,15 +1,11 @@
 from __future__ import unicode_literals
 from discord.ext import commands
 import discord
-import pyowm
-import schedule
-import time
-from pyowm import timeutils
-
 import asyncio
 import itertools
 import sys
 import traceback
+import time
 import os
 from async_timeout import timeout
 from functools import partial
@@ -20,10 +16,7 @@ OPUS_LIBS = ['libopus-0.x86.dll', 'libopus-0.x64.dll',
              'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
 
 bot = commands.Bot(command_prefix='-')
-owm = pyowm.OWM('8638c55431d913688db69d830ed8d17b', language='ru')
 
-fc = owm.daily_forecast('Angarsk,RU')
-times = timeutils.tomorrow(14)
 send_Resume = ""
 sent = ""
 
@@ -178,15 +171,12 @@ class MusicPlayer:
 			self.current = source
 
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
-			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}** ' + str(time.monotonic() - start) + '{0[0]}:{0[1]} / '.format(divmod(source.duration, 60)))
+			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}** ' + str(time.monotonic() - start) + ' {0[0]}:{0[1]} / '.format(divmod(source.duration, 60)))
 			await self.next.wait()
 
 			# Make sure the FFmpeg process is cleaned up.
 			source.cleanup()
 			self.current = None
-
-			while self._guild.voice_client.is_playing():
-				print("Играю")
 
 			try:
 				# We are no longer playing this song...
@@ -309,6 +299,8 @@ class Music:
 			source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
 
 			await player.queue.put(source)
+			while vc.is_playing():
+				print("Сейчас играет музыка")
 
 	@commands.command(name='pause', aliases=['зфгыу'])
 	async def pause(self, ctx):
