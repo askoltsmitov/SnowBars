@@ -175,7 +175,7 @@ class MusicPlayer:
 			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}** ' + str(time.monotonic() - start) + ' / ' + str(duration[0]) + ' ' + str(duration[1]))
 			msg = await self._channel.send("Хуёвый тест")
 			while self.vc.is_playing():
-				await self.msg.edit(str(time.monotonic() - start) + ' / ' + str(duration[0]) + ':' + str(duration[1]))
+				await msg.edit(str(time.monotonic() - start) + ' / ' + str(duration[0]) + ':' + str(duration[1]))
 			await self.next.wait()
 
 			# Make sure the FFmpeg process is cleaned up.
