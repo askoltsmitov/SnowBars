@@ -130,7 +130,7 @@ class MusicPlayer:
 		self._guild = ctx.guild
 		self._channel = ctx.channel
 		self._cog = ctx.cog
-		self._vc = ctx.voice_client
+		vc = ctx.voice_client
 
 		self.queue = asyncio.Queue()
 		self.next = asyncio.Event()
@@ -173,7 +173,7 @@ class MusicPlayer:
 
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
 			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}** ' + str(time.monotonic() - start) + ' {0[0]}:{0[1]} / '.format(divmod(source.duration, 60)))
-			while self._vc.is_playing():
+			while vc.is_playing():
 				print("test")
 			await self.next.wait()
 
