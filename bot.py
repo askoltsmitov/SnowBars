@@ -441,14 +441,9 @@ class Music:
 class Mute:
 	"""Mute commands"""
 
-	__slots__ = ('bot')
-
-	def __init__(self, bot):
-		self.bot = bot
-
 		# <--- Mute Command --->
 	@commands.command(name='mute')
-	async def mute(self, ctx, member: discord.Member):
+	async def mute(ctx, member: discord.Member):
 		'''Мут'''
 		global sent
 		await ctx.message.delete()
@@ -464,7 +459,7 @@ class Mute:
 
 	# <--- Unmute Command --->
 	@commands.command(name='unmute')
-	async def unmute(self, ctx, member: discord.Member):
+	async def unmute(ctx, member: discord.Member):
 		'''Анмут'''
 		await ctx.message.delete()
 		await sent.delete()
