@@ -169,13 +169,14 @@ class MusicPlayer:
 			source.volume = self.volume
 			self.current = source
 
+			channel = bot.get_channel(199459074243297280)
 			start = time.monotonic()
 			duration = divmod(source.duration, 60)
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
 			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}** ' + str(time.monotonic() - start) + ' / ' + str(duration[0]) + ' ' + str(duration[1]))
-			msg = await self._channel.send("Хуёвый тест")
+			msg = await channel.send("Хуёвый тест")
 			while self.vc.is_playing():
-				await msg.edit("тест")
+				await msg.delete()
 			await self.next.wait()
 
 			# Make sure the FFmpeg process is cleaned up.
