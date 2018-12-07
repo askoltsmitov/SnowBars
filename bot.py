@@ -185,6 +185,9 @@ class MusicPlayer:
 			source.cleanup()
 			self.current = None
 
+			while self._guild.voice_client.is_playing():
+				print("Играю")
+
 			try:
 				# We are no longer playing this song...
 				await self.np.delete()
