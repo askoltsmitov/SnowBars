@@ -471,10 +471,10 @@ class Mute:
 
 @bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(bot))
-    channel = bot.get_channel(199459074243297280)
-    msg = await channel.send("Тест")
-    await msg.edit("Хуест")
+  print('We have logged in as {0.user}'.format(bot))
+  channel = bot.get_channel(199459074243297280)
+  msg = await channel.send("Тест")
+  await message.edit(msg, "Хуест")
 
 
 bot.add_cog(Music(bot))
