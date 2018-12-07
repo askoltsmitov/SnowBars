@@ -448,7 +448,7 @@ class Mute:
 
 		# <--- Mute Command --->
 	@commands.command(name='mute')
-	async def mute(ctx, member: discord.Member):
+	async def mute(self, ctx, member: discord.Member):
 		'''Мут'''
 		global sent
 		await ctx.message.delete()
@@ -459,17 +459,19 @@ class Mute:
 		await member.add_roles(role)
 		channel = bot.get_channel(199459074243297280)
 		sent = await channel.send(embed=embed)
-		qwer = await channel.send("Привет как дела")
-		await qwer.edit("Никак")
 
 	# <--- Unmute Command --->
 	@commands.command(name='unmute')
-	async def unmute(ctx, member: discord.Member):
+	async def unmute(self, ctx, member: discord.Member):
 		'''Анмут'''
 		await ctx.message.delete()
 		await sent.delete()
 		role = discord.utils.get(member.guild.roles, name="Muted")
 		await member.remove_roles(role)
+
+@bot.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(bot))
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
