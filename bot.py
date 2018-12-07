@@ -122,7 +122,7 @@ class MusicPlayer:
 	When the bot disconnects from the Voice it's instance will be destroyed.
 	"""
 
-	__slots__ = ('bot', '_guild', '_channel', '_cog', 'queue', 'next', 'current', 'np', 'volume')
+	__slots__ = ('bot', '_guild', '_channel', '_cog', 'vc', 'queue', 'next', 'current', 'np', 'volume')
 
 	def __init__(self, ctx):
 		i = 0
@@ -130,7 +130,7 @@ class MusicPlayer:
 		self._guild = ctx.guild
 		self._channel = ctx.channel
 		self._cog = ctx.cog
-		vc = ctx.voice_client
+		self.vc = ctx.voice_client
 
 		self.queue = asyncio.Queue()
 		self.next = asyncio.Event()
@@ -173,7 +173,7 @@ class MusicPlayer:
 
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
 			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}** ' + str(time.monotonic() - start) + ' {0[0]}:{0[1]} / '.format(divmod(source.duration, 60)))
-			while vc.is_playing():
+			while self.vc.is_playing():
 				print("test")
 			await self.next.wait()
 
@@ -466,34 +466,6 @@ class Mute:
 		role = discord.utils.get(member.guild.roles, name="Muted")
 		await member.remove_roles(role)
 
-def changeWeather():
-	print("Test 1")
-	@bot.event
-	async def on_ready():
-		print("Test 2")
-		# Нахождение температуры
-		weather_cry = ""
-		w = fc.get_weather_at(times)
-		start = str((w.get_temperature('celsius'))).find(" ")
-		end = str((w.get_temperature('celsius'))).find(",")
-		temp = str((w.get_temperature('celsius')))[start:end-1]
-
-		if fc.will_be_rainy_at(times):
-			weather_cry = " , возможен :cloud_rain:"
-
-		if fc.will_be_snowy_at(times):
-			weather_cry = " , возможен :cloud_snow:"
-
-		channel = bot.get_channel(199459074243297280)
-		await channel.send("Температура на завтра: " + temp + " C" + weather_cry)
-
-
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
 bot.run(os.getenv('TOKEN'))
-
-schedule.every().day.at("02:10").do(changeWeather)
-
-while True:
-	schedule.run_pending()
-	time.sleep(10)
