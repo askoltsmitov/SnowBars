@@ -170,12 +170,14 @@ class MusicPlayer:
 			self.current = source
 
 			start = time.monotonic()
-			duration = divmod(source.duration, 60)
+			durTotal = divmod(source.duration, 60)
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
 			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}**')
-			msg = await self._channel.send(str(time.monotonic() - start) + ' / ' + str(duration[0]) + " " + str(duration[1]))
+			msg = await self._channel.send('{durCurrent[0]}:{durCurrent[1}/{durTotal[0]}:{durTotal[1]}')
 			while self.vc.is_playing():
-				await msg.edit(content = str(time.monotonic() - start) + ' / ' + str(duration[0]) + " " + str(duration[1]))
+				durCurrent = divmod(time.monotonic() - start, 60)
+				await msg.edit(content = '{durCurrent[0]}:{durCurrent[1}/{durTotal[0]}:{durTotal[1]}')
+				time.sleep(0.5)
 			await self.next.wait()
 
 			# Make sure the FFmpeg process is cleaned up.
@@ -184,6 +186,7 @@ class MusicPlayer:
 
 			try:
 				# We are no longer playing this song...
+				await msg.delete()
 				await self.np.delete()
 			except discord.HTTPException:
 				pass
