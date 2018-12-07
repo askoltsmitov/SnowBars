@@ -441,6 +441,11 @@ class Music:
 class Mute:
 	"""Mute commands"""
 
+	__slots__ = ('bot')
+
+	def __init__(self, bot):
+		self.bot = bot
+
 		# <--- Mute Command --->
 	@commands.command(name='mute')
 	async def mute(ctx, member: discord.Member):
