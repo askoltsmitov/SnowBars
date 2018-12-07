@@ -172,12 +172,10 @@ class MusicPlayer:
 			start = time.monotonic()
 			duration = divmod(source.duration, 60)
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
-			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}** ' + str(time.monotonic() - start) + ' / ' + str(duration[0]) + ' ' + str(duration[1]))
-
-			msg = await self._channel.send("Хуёвый тест")
-#			while self.vc.is_playing():
-#				await msg.edit(123)
-
+			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}**')
+			msg = await self._channel.send(str(time.monotonic() - start) + ' / ' + str(duration[0]) + " " + str(duration[1]))
+			while self.vc.is_playing():
+				await msg.edit(content = str(time.monotonic() - start) + ' / ' + str(duration[0]) + " " + str(duration[1]))
 			await self.next.wait()
 
 			# Make sure the FFmpeg process is cleaned up.
@@ -468,14 +466,6 @@ class Mute:
 		await sent.delete()
 		role = discord.utils.get(member.guild.roles, name="Muted")
 		await member.remove_roles(role)
-
-@bot.event
-async def on_ready():
-  print('We have logged in as {0.user}'.format(bot))
-  channel = bot.get_channel(199459074243297280)
-  msg = await channel.send("Тест")
-  await msg.edit(content = "Хуест")
-
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
