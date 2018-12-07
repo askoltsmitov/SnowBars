@@ -180,6 +180,7 @@ class MusicPlayer:
 
 			try:
 				# We are no longer playing this song...
+				print("test")
 				await self.np.delete()
 			except discord.HTTPException:
 				pass
@@ -299,8 +300,6 @@ class Music:
 			source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
 
 			await player.queue.put(source)
-			while vc.is_playing():
-				print("Сейчас играет музыка")
 
 	@commands.command(name='pause', aliases=['зфгыу'])
 	async def pause(self, ctx):
