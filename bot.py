@@ -173,7 +173,7 @@ class MusicPlayer:
 			durTotal = divmod(source.duration, 60)
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
 			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` by **{source.requester}**')
-			msg = await self._channel.send(str(durCurrent[0]) + ":" + str(durCurrent[1]) + "/" + str(durTotal[0]) + ":" + str(durTotal[1]))
+			msg = await self._channel.send(str(0) + ":" + str(0) + "/" + str(durTotal[0]) + ":" + str(durTotal[1]))
 			while self.vc.is_playing():
 				durCurrent = divmod(time.monotonic() - start, 60)
 				await msg.edit(content = str(durCurrent[0]) + ":" + str(durCurrent[1]) + "/" + str(durTotal[0]) + ":" + str(durTotal[1]))
