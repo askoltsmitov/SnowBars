@@ -1,3 +1,3 @@
--U youtube_dl
+install -U youtube_dl
 yarl
 https://github.com/Rapptz/discord.py/archive/rewrite.zip#egg=discord.py[voice]
