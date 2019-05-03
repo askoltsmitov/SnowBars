@@ -195,7 +195,7 @@ class MusicPlayer:
 		"""Disconnect and cleanup the player."""
 		return self.bot.loop.create_task(self._cog.cleanup(guild))
 
-class Music:
+class Music(commands.Cog):
 	"""Music related commands."""
 
 	__slots__ = ('bot', 'players')
@@ -439,7 +439,7 @@ class Music:
 			await self.cleanup(ctx.guild)
 
 
-class Mute:
+class Mute(commands.Cog):
 	"""Mute commands"""
 
 	__slots__ = ('bot')
@@ -470,6 +470,6 @@ class Mute:
 		role = discord.utils.get(member.guild.roles, name="Muted")
 		await member.remove_roles(role)
 
-#bot.add_cog(Music(bot))
-bot.add_cog(Mute(bot))
+bot.load_extension(Music(bot))
+bot.load_extension(Mute(bot))
 bot.run(os.getenv('TOKEN'))
