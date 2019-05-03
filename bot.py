@@ -470,6 +470,6 @@ class Mute(commands.Cog):
 		role = discord.utils.get(member.guild.roles, name="Muted")
 		await member.remove_roles(role)
 
-bot.load_extension(Music(bot))
-bot.load_extension(Mute(bot))
+bot.add_cog(Music(bot))
+bot.add_cog(Mute(bot))
 bot.run(os.getenv('TOKEN'))
