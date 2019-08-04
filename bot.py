@@ -472,5 +472,4 @@ class Mute(commands.Cog):
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
-bot.run("Mjc5NTg1MDg0Mjg4MjcwMzM2.Dt53fQ.-DPj1s0bVasZXzML7hSa6uOKh-g")
-#bot.run(os.getenv('TOKEN'))
+bot.run(os.getenv('TOKEN'))
