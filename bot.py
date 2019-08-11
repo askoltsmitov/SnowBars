@@ -181,7 +181,6 @@ class MusicPlayer:
 
 			try:
 				# We are no longer playing this song...
-				await msg.delete()
 				await self.np.delete()
 			except discord.HTTPException:
 				pass
