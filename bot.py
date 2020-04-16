@@ -467,7 +467,7 @@ class Mute(commands.Cog):
 
 	# <--- Shelby Command --->
 	@commands.command(name='shelby')
-	async def shelby(selfself, ctx):
+	async def shelby(self, ctx):
 		await ctx.message.delete()
 		print(type(os.getenv('OVW_NAME')))
 		player = pyowapi.get_player(str(os.getenv('OVW_NAME')))
