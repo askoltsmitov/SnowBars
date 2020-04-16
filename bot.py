@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from discord.ext import commands
 import discord
+import pyowapi
 import asyncio
 import itertools
 import sys
@@ -448,9 +449,10 @@ class Mute(commands.Cog):
 		global sent
 		await ctx.message.delete()
 		role = discord.utils.get(member.guild.roles, name="Muted")
-		embed = discord.Embed(title="Uh oh retard alert!", description="-unmute {}".format(member.name) , color=0xFF0000)
+		embed = discord.Embed(title="Uh oh retard alert!", description="-unmute {}".format(member.name), color=0xFF0000)
 		embed.set_footer(text="Shut up, please by " + str(ctx.author.name))
 		embed.set_thumbnail(url=member.avatar_url)
+		embed.thumbnail(width=128, height=128)
 		await member.add_roles(role)
 		channel = bot.get_channel(199459074243297280)
 		sent = await channel.send(embed=embed)
@@ -463,6 +465,16 @@ class Mute(commands.Cog):
 		await sent.delete()
 		role = discord.utils.get(member.guild.roles, name="Muted")
 		await member.remove_roles(role)
+
+	# <--- Shelby Command --->
+	@commands.command(name='shelby')
+	async def shelby(selfself, ctx):
+		await ctx.message.delete()
+		player = pyowapi.get_player(os.getenv('OVW_NAME'))
+		tank = player.competitive_tank
+		heal = player.competitive_support
+		embed = discord.Embed(title="Статистика дня!", )
+
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
