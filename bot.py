@@ -469,8 +469,8 @@ class Mute(commands.Cog):
 	@commands.command(name='shelby')
 	async def shelby(selfself, ctx):
 		await ctx.message.delete()
-		print(os.getenv('OVW_NAME'))
-		player = pyowapi.get_player(os.getenv('OVW_NAME'))
+		print(type(os.getenv('OVW_NAME')))
+		player = pyowapi.get_player(str(os.getenv('OVW_NAME')))
 		tank = player.competitive_tank
 		heal = player.competitive_support
 
