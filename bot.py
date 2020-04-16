@@ -452,7 +452,6 @@ class Mute(commands.Cog):
 		embed = discord.Embed(title="Uh oh retard alert!", description="-unmute {}".format(member.name), color=0xFF0000)
 		embed.set_footer(text="Shut up, please by " + str(ctx.author.name))
 		embed.set_thumbnail(url=member.avatar_url)
-		embed.thumbnail(width=128, height=128)
 		await member.add_roles(role)
 		channel = bot.get_channel(199459074243297280)
 		sent = await channel.send(embed=embed)
@@ -473,8 +472,21 @@ class Mute(commands.Cog):
 		player = pyowapi.get_player(os.getenv('OVW_NAME'))
 		tank = player.competitive_tank
 		heal = player.competitive_support
-		embed = discord.Embed(title="Статистика дня!", )
 
+		if tank >= 2500:
+			tank = "Tank: идёт к успеху - " + str(tank) + "\n"
+		else:
+			tank = "Tank: на законном - " + str(tank) + "\n"
+
+		if heal >= 2500:
+			heal = "Tank: идёт к успеху - " + str(heal)
+		else:
+			heal = "Tank: на законном - " + str(heal)
+
+		embed = discord.Embed(title="Статистика дня!", )
+		embed.set_footer(text=tank + heal)
+		channel = bot.get_channel(199459074243297280)
+		await channel.send(embed=embed)
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
