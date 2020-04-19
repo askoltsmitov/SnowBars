@@ -1,5 +1,6 @@
 discord.py[voice]==1.3.3
 pyowapi
+tornado==4.5.3
 pip
 youtube_dl==2020.3.24
 aiohttp>=3.3.0,<3.6.0
