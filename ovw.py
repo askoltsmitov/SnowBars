@@ -65,7 +65,7 @@ async def _get_player(player: str) -> Player:
 
 
 def get_player(player: str):
-    result = await asyncio.gather(_get_player(player))
+    result = _get_player(player)
     return result
 
 
