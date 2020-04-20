@@ -58,16 +58,16 @@ async def _get_player_internal(player: str, session):
         return Player(player, {"error": "timeout"})
 
 
-async def _get_player(player: str) -> Player:
+async def get_player(player: str) -> Player:
     async with aiohttp.ClientSession() as session:
         result = await _get_player_internal(player, session)
         return result
 
-
+"""
 async def get_player(player: str):
     result = await asyncio.gather(_get_player(player))
     return result
-
+"""
 
 async def _get_bulk_players(players: list) -> List[Player]:
     async with aiohttp.ClientSession() as session:
