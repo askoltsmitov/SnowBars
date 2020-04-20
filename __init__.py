@@ -8,6 +8,7 @@ import sys
 import traceback
 import time
 import os
+import nest_asyncio
 from async_timeout import timeout
 from functools import partial
 from youtube_dl import YoutubeDL
@@ -20,6 +21,7 @@ bot = commands.Bot(command_prefix='-')
 
 send_Resume = ""
 sent = ""
+nest_asyncio.apply()
 
 def load_opus_lib(opus_libs=OPUS_LIBS):
     if opus.is_loaded():
@@ -471,8 +473,9 @@ class Mute(commands.Cog):
 		await ctx.message.delete()
 		
 		player = ovw.get_player(os.getenv('OVW_NAME'))
-		tank = player.competitive_tank
-		heal = player.competitive_support
+
+		#tank = player.competitive_tank
+		#heal = player.competitive_support
 
 		if tank >= 2500:
 			tank = "Tank: идёт к успеху - " + str(tank) + "\n"
