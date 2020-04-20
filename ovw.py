@@ -1,7 +1,7 @@
 import asyncio
 import aiohttp
+import nest_asyncio
 from typing import List
-
 
 class Player:
     def __init__(self, bnet, response):
@@ -64,8 +64,9 @@ async def _get_player(player: str) -> Player:
         return result
 
 def get_player(player: str):
-    loop2 = asyncio.get_event_loop()
-    result = loop2.run_until_complete(_get_player(player))
+    nest_asyncio.apply()
+    loop = asyncio.get_event_loop()
+    result = loop.run_until_complete(_get_player(player))
     return result
 
 async def _get_bulk_players(players: list) -> List[Player]:
