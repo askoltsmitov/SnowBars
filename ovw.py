@@ -64,8 +64,8 @@ async def _get_player(player: str) -> Player:
         return result
 
 def get_player(player: str):
-    loop = asyncio.get_event_loop()
-    result = loop.run_until_complete(_get_player(player))
+    loop2 = asyncio.get_event_loop()
+    result = loop2.run_until_complete(_get_player(player))
     return result
 
 async def _get_bulk_players(players: list) -> List[Player]:
