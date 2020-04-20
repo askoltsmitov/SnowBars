@@ -483,11 +483,11 @@ class Mute(commands.Cog):
 			tank = "Tank: на законном - " + str(tank) + "\n"
 
 		if heal >= 2500:
-			heal = "Tank: идёт к успеху - " + str(heal)
+			heal = "Heal: идёт к успеху - " + str(heal)
 		else:
-			heal = "Tank: на законном - " + str(heal)
+			heal = "Heal: на законном - " + str(heal)
 
-		embed = discord.Embed(title="Статистика дня!", )
+		embed = discord.Embed(title="Статистика дня!", color=0xFF0000)
 		embed.set_footer(text=tank + heal)
 		channel = bot.get_channel(199459074243297280)
 		await channel.send(embed=embed)
