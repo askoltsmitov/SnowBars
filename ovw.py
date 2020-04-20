@@ -59,6 +59,7 @@ async def _get_player_internal(player: str, session):
 
 
 async def get_player(player: str) -> Player:
+    print("test")
     async with aiohttp.ClientSession() as session:
         result = await _get_player_internal(player, session)
         return result
