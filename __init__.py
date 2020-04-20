@@ -474,8 +474,8 @@ class Mute(commands.Cog):
 		
 		player = ovw.get_player(os.getenv('OVW_NAME'))
 
-		#tank = player.competitive_tank
-		#heal = player.competitive_support
+		tank = player.competitive_tank
+		heal = player.competitive_support
 
 		if tank >= 2500:
 			tank = "Tank: идёт к успеху - " + str(tank) + "\n"
