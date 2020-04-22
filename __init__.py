@@ -516,7 +516,7 @@ class Mute(commands.Cog):
 			heal = "**Хилер** − ***" + str(heal) + ":***   **Найди что-нибудь другое, это не твоё** :mad:"
 		
 		channel = bot.get_channel(199459074243297280)
-		await channel.send(tank, heal)
+		await channel.send(tank + heal)
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
