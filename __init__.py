@@ -290,7 +290,7 @@ class Music(commands.Cog):
 			await ctx.message.delete()
 			await ctx.trigger_typing()
 
-			curDirect = os.getcwd
+			curDirect = str(os.getcwd)
 			onlyfiles = [f for f in os.listdir(curDirect) if os.path.isfile(join(curDirect, f))]
 			print(onlyfiles)
 
