@@ -480,6 +480,7 @@ class Mute(commands.Cog):
 
 		with open('Calibration.txt', 'r') as file:
 			words = file.readlines()
+			words = [s.strip("\n") for s in words]
 
 		word = random.choice(words)
 
