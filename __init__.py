@@ -9,6 +9,7 @@ import traceback
 import time
 import os
 import nest_asyncio
+import random
 from async_timeout import timeout
 from functools import partial
 from youtube_dl import YoutubeDL
@@ -477,7 +478,14 @@ class Mute(commands.Cog):
 		tank = player.competitive_tank
 		heal = player.competitive_support
 
-		if tank >= 2700:
+		with open('Calibration.txt', 'r') as file:
+			words = file.readlines()
+
+		word = random.choice(words)
+
+		if tank = False:
+			tank = "**Танк** − ***" + word + "в калиброке*** :wink:\n"
+		elif tank >= 2700:
 			tank = "**Танк** − ***" + str(tank) + ":***   :x::o:**DemiGOD**:100:\n"
 		elif tank >= 2600:
 			tank = "**Танк** − ***" + str(tank) + ":***   **Почти cyberКотлета** :smirk_cat:\n"
@@ -496,7 +504,9 @@ class Mute(commands.Cog):
 		else:
 			tank = "**Танк** − ***" + str(tank) + ":***   **Найди что-нибудь другое, это не твоё** :mad:\n"
 
-		if heal >= 2700:
+		if heal = False:
+			heal = "**Хилер** − ***" + word + "в калиброке*** :wink:"
+		elif heal >= 2700:
 			heal = "**Хилер** − ***" + str(heal) + ":***   :x::o:**DemiGOD**:100:"
 		elif heal >= 2600:
 			heal = "**Хилер** − ***" + str(heal) + ":***   **Почти cyberКотлета** :smirk_cat:"
