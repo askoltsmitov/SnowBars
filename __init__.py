@@ -289,6 +289,8 @@ class Music(commands.Cog):
 			"""
 			await ctx.message.delete()
 			await ctx.trigger_typing()
+			
+			print(os.getcwd()
 
 			vc = ctx.voice_client
 
@@ -305,9 +307,7 @@ class Music(commands.Cog):
 
 			await player.queue.put(source)
 
-			for root, dirs, files in walk(os.getcwd()):
-				for file in files:
-					print(file)
+
 
 	@commands.command(name='pause', aliases=['зфгыу'])
 	async def pause(self, ctx):
