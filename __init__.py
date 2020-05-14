@@ -290,7 +290,9 @@ class Music(commands.Cog):
 			await ctx.message.delete()
 			await ctx.trigger_typing()
 
-			print(os.getcwd())
+			for root, dirs, files in walk(os.getcwd()):
+				for file in files:
+					print(file)
 
 			vc = ctx.voice_client
 
@@ -306,7 +308,6 @@ class Music(commands.Cog):
 			source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=True)
 
 			await player.queue.put(source)
-
 
 
 	@commands.command(name='pause', aliases=['зфгыу'])
