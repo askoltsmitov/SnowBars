@@ -485,7 +485,7 @@ class Mute(commands.Cog):
 		word = random.choice(words)
 
 		if tank == False:
-			tank = "**Танк** − ***" + word + "в калиброке*** :wink:\n"
+			tank = "**Танк** − ***" + word + " в калибровке*** :wink:\n"
 		elif tank >= 2700:
 			tank = "**Танк** − ***" + str(tank) + ":***   :x::o:**DemiGOD**:100:\n"
 		elif tank >= 2600:
@@ -506,7 +506,7 @@ class Mute(commands.Cog):
 			tank = "**Танк** − ***" + str(tank) + ":***   **Найди что-нибудь другое, это не твоё** :mad:\n"
 
 		if heal == False:
-			heal = "**Хилер** − ***" + word + "в калиброке*** :wink:"
+			heal = "**Хилер** − ***" + word + " в калибровке*** :wink:"
 		elif heal >= 2700:
 			heal = "**Хилер** − ***" + str(heal) + ":***   :x::o:**DemiGOD**:100:"
 		elif heal >= 2600:
