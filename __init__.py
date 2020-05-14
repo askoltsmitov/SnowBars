@@ -290,7 +290,7 @@ class Music(commands.Cog):
 			await ctx.message.delete()
 			await ctx.trigger_typing()
 
-			for root, dirs, files in walk(os.getcwd()):
+			for root, dirs, files in os.walk(os.getcwd()):
 				for file in files:
 					print(file)
 
