@@ -290,9 +290,8 @@ class Music(commands.Cog):
 			await ctx.message.delete()
 			await ctx.trigger_typing()
 
-			for root, dirs, files in os.walk(os.getcwd()):
-				for file in files:
-					print(file)
+			onlyfiles = [f for f in os.listdir(mypath) if os.path.isfile(join(os.getcwd, f))]
+			print(onlyfiles)
 
 			vc = ctx.voice_client
 
