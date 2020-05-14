@@ -301,9 +301,13 @@ class Music(commands.Cog):
 
 			# If download is False, source will be a dict which will be used later to regather the stream.
 			# If download is True, source will be a discord.FFmpegPCMAudio with a VolumeTransformer.
-			source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
+			source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=True)
 
 			await player.queue.put(source)
+
+			for root, dirs, files in walk(os.getcwd()):
+				for file in files:
+					print(file)
 
 	@commands.command(name='pause', aliases=['зфгыу'])
 	async def pause(self, ctx):
