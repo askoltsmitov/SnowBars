@@ -289,7 +289,7 @@ class Music(commands.Cog):
 			"""
 			await ctx.message.delete()
 			await ctx.trigger_typing()
-			
+
 			print(os.getcwd()
 
 			vc = ctx.voice_client
