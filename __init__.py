@@ -50,7 +50,8 @@ ytdlopts = {
 	'quiet': True,
 	'no_warnings': True,
 	'default_search': 'auto',
-	'source_address': '0.0.0.0'
+	'source_address': '0.0.0.0',
+	'-4': True
 }
 
 ffmpegopts = {
