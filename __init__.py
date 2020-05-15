@@ -291,6 +291,7 @@ class Music(commands.Cog):
 			await ctx.trigger_typing()
 
 			curDirect = str(os.getcwd)
+			print(curDirect)
 			onlyfiles = [f for f in os.listdir(curDirect) if os.path.isfile(join(curDirect, f))]
 			print(onlyfiles)
 
