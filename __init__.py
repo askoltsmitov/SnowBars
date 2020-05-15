@@ -8,6 +8,7 @@ import sys
 import traceback
 import time
 import os
+import shutil
 import nest_asyncio
 import random
 from async_timeout import timeout
@@ -291,9 +292,10 @@ class Music(commands.Cog):
 			await ctx.message.delete()
 			await ctx.trigger_typing()
 
-			curDirect = os.getcwd()
-			onlyfiles = [os.path.join(curDirect, f) for f in os.listdir(curDirect)]
-			print(onlyfiles)
+			try:
+				shutil.rmtree('/app/downloads')
+			except OSError as e:
+				print("Error: %s - %s." % (e.filename, e.strerror))
 
 			vc = ctx.voice_client
 
