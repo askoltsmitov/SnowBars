@@ -42,7 +42,7 @@ load_opus_lib()
 
 ytdlopts = {
 	'format': 'bestaudio/best',
-	'outtmpl': 'downloads/%(timestamp)s.%(ext)s',
+	'outtmpl': 'downloads/%(duration)s.%(ext)s',
 	'restrictfilenames': True,
 	'noplaylist': True,
 	'nocheckcertificate': True,
