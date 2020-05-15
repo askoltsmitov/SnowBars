@@ -292,7 +292,7 @@ class Music(commands.Cog):
 			await ctx.trigger_typing()
 
 			curDirect = os.getcwd()
-			onlyfiles = [f for f in os.listdir(curDirect) if os.path.isfile(os.path.join(curDirect, f))]
+			onlyfiles = [f for f in os.listdir(curDirect) os.path.join(curDirect, f)]
 			print(onlyfiles)
 
 			vc = ctx.voice_client
