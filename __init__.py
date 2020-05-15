@@ -179,6 +179,8 @@ class MusicPlayer:
 			durTotal = divmod(source.duration, 60)
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
 			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` ({str(durTotal[0])}:{str(durTotal[1])}) by **{source.requester}**')
+			onlyfiles = [f for f in os.listdir("/app/downloads") if os.path.isfile(os.path.join("/app/downloads", f))]
+			print(onlyfiles)
 			await self.next.wait()
 
 			# Make sure the FFmpeg process is cleaned up.
@@ -292,10 +294,10 @@ class Music(commands.Cog):
 			await ctx.message.delete()
 			await ctx.trigger_typing()
 
-			try:
-				shutil.rmtree('/app/downloads')
-			except OSError as e:
-				print("Error: %s - %s." % (e.filename, e.strerror))
+			#try:
+			#	shutil.rmtree('/app/downloads')
+			#except OSError as e:
+			#	print("Error: %s - %s." % (e.filename, e.strerror))
 
 			vc = ctx.voice_client
 
