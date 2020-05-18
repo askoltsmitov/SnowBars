@@ -188,7 +188,7 @@ class MusicPlayer:
 			source.cleanup()
 			self.current = None
 
-			pathSong = os.path.join("/app/downloads", source.duration)
+			pathSong = os.path.join("/app/downloads", str(source.duration))
 			print(pathSong)
 
 			try:
