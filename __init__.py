@@ -179,13 +179,18 @@ class MusicPlayer:
 			durTotal = divmod(source.duration, 60)
 			self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
 			self.np = await self._channel.send(f'**Сейчас играет: ** `{source.title}` ({str(durTotal[0])}:{str(durTotal[1])}) by **{source.requester}**')
-			onlyfiles = [f for f in os.listdir("/app/downloads") if os.path.isfile(os.path.join("/app/downloads", f))]
-			print(onlyfiles, source.duration)
 			await self.next.wait()
 
 			# Make sure the FFmpeg process is cleaned up.
 			source.cleanup()
 			self.current = None
+
+			pathSong = os.path.join("/app/downloads", source.duration)
+
+			try:
+				os.remove(pathSong)
+			except OSError:
+				print("File not exist.")
 
 			try:
 				# We are no longer playing this song...
