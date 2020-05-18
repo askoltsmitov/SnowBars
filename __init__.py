@@ -193,7 +193,7 @@ class MusicPlayer:
 
 			pathSong = os.path.join("/app/downloads", str(source.duration))
 			try:
-				os.remove(pathSong)
+				await os.remove(pathSong)
 			except OSError:
 				print("File not exist.")
 
