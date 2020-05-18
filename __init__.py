@@ -185,18 +185,17 @@ class MusicPlayer:
 			source.cleanup()
 			self.current = None
 
-			pathSong = os.path.join("/app/downloads", str(source.duration))
-
-			try:
-				await self.os.remove(pathSong)
-			except OSError:
-				print("File not exist.")
-
 			try:
 				# We are no longer playing this song...
 				await self.np.delete()
 			except discord.HTTPException:
 				pass
+
+			pathSong = os.path.join("/app/downloads", str(source.duration))
+			try:
+				os.remove(pathSong)
+			except OSError:
+				print("File not exist.")
 
 	def destroy(self, guild):
 		"""Disconnect and cleanup the player."""
@@ -366,6 +365,12 @@ class Music(commands.Cog):
 
 			vc.stop()
 			await ctx.send(f'**{ctx.author.name}**: Не хочет эту песню!', delete_after=15)
+
+			pathSong = os.path.join("/app/downloads", str(source.duration))
+			try:
+				os.remove(pathSong)
+			except OSError:
+				print("File not exist.")
 
 	@commands.command(name='queue', aliases=['йгугу'])
 	async def queue_info(self, ctx):
