@@ -475,7 +475,7 @@ class Mute(commands.Cog):
 		embed = discord.Embed(title="Uh oh retard alert!", description="-unmute {}".format(member.name), color=0xFF0000)
 		embed.set_footer(text="Shut up, please by " + str(ctx.author.name))
 		embed.set_thumbnail(url=member.avatar_url)
-		await member.edit(voice_channel)
+		await member.edit(voice_channel = None)
 		#await member.add_roles(role)
 		channel = bot.get_channel(199459074243297280)
 		sent = await channel.send(embed=embed)
