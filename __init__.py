@@ -22,7 +22,6 @@ OPUS_LIBS = ['libopus-0.x86.dll', 'libopus-0.x64.dll',
 bot = commands.Bot(command_prefix='-')
 
 send_Resume = ""
-sent = ""
 nest_asyncio.apply()
 
 def load_opus_lib(opus_libs=OPUS_LIBS):
@@ -466,28 +465,11 @@ class Mute(commands.Cog):
 		self.bot = bot
 
 		# <--- Mute Command --->
-	@commands.command(name='mute')
+	@commands.command(name='mute', aliases=['kick'])
 	async def mute(self, ctx, member: discord.Member):
-		'''Мут'''
-		global sent
+		'''Кик из Voice канала'''
 		await ctx.message.delete()
-		role = discord.utils.get(member.guild.roles, name="Muted")
-		embed = discord.Embed(title="Uh oh retard alert!", description="-unmute {}".format(member.name), color=0xFF0000)
-		embed.set_footer(text="Shut up, please by " + str(ctx.author.name))
-		embed.set_thumbnail(url=member.avatar_url)
 		await member.edit(voice_channel = None)
-		#await member.add_roles(role)
-		channel = bot.get_channel(199459074243297280)
-		sent = await channel.send(embed=embed)
-
-	# <--- Unmute Command --->
-	@commands.command(name='unmute')
-	async def unmute(self, ctx, member: discord.Member):
-		'''Анмут'''
-		await ctx.message.delete()
-		await sent.delete()
-		role = discord.utils.get(member.guild.roles, name="Muted")
-		await member.remove_roles(role)
 
 	# <--- Shelby Command --->
 	@commands.command(name='shelby')
