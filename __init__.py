@@ -82,7 +82,6 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
 	@classmethod
 	async def create_source(cls, ctx, search: str, *, loop, download=False):
-		print(str(download))
 		loop = loop or asyncio.get_event_loop()
 
 		to_run = partial(ytdl.extract_info, url=search, download=download)
@@ -358,7 +357,7 @@ class Music(commands.Cog):
 			vc.stop()
 			await ctx.send(f'**{ctx.author.name}**: Не хочет эту песню!', delete_after=15)
 
-			pathSong = os.path.join("/app/downloads", str(source.duration))
+			pathSong = os.path.join("/app/downloads", str(vc.source.duration))
 			try:
 				os.remove(pathSong)
 			except OSError:
