@@ -21,7 +21,6 @@ OPUS_LIBS = ['libopus-0.x86.dll', 'libopus-0.x64.dll',
              'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
 
 send_Resume = ""
-pathSong = ""
 
 def load_opus_lib(opus_libs=OPUS_LIBS):
     if opus.is_loaded():
@@ -180,12 +179,6 @@ class MusicPlayer:
 			except discord.HTTPException:
 				pass
 
-			pathSong = os.path.join("/app", str(source.duration))
-			print(pathSong)
-			try:
-				os.remove(pathSong)
-			except OSError:
-				print("File not exist.")
 
 	def destroy(self, guild):
 		"""Disconnect and cleanup the player."""
@@ -305,9 +298,6 @@ class Music(commands.Cog):
 			# If download is False, source will be a dict which will be used later to regather the stream.
 			# If download is True, source will be a discord.FFmpegPCMAudio with a VolumeTransformer.
 			source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=True)
-			print(source.duration)
-			pathSong = os.path.join("/app/", str(source.duration))
-			print(os.getcwd())
 			print(os.listdir())
 
 			await player.queue.put(source)
