@@ -183,7 +183,6 @@ class MusicPlayer:
 			pathSong = os.path.join("/app", str(source.duration))
 			try:
 				os.remove(pathSong)
-				print("File is delete.")
 			except OSError:
 				print("File not exist.")
 
@@ -357,11 +356,6 @@ class Music(commands.Cog):
 
 			vc.stop()
 			await ctx.send(f'**{ctx.author.name}**: Не хочет эту песню!', delete_after=15)
-
-			try:
-				os.remove(pathSong)
-			except OSError:
-				print("File not exist.")
 
 	@commands.command(name='queue', aliases=['йгугу'])
 	async def queue_info(self, ctx):
