@@ -1,7 +1,7 @@
-from __future__ import unicode_literals
-from discord.ext import commands
 import discord
-import ovw
+from discord.ext import commands
+
+from __future__ import unicode_literals
 import asyncio
 import itertools
 import sys
@@ -9,20 +9,19 @@ import traceback
 import time
 import os
 import shutil
-import nest_asyncio
 import random
+
 from async_timeout import timeout
 from functools import partial
 from youtube_dl import YoutubeDL
 from discord import opus
 
+bot = commands.Bot(command_prefix='-')
+
 OPUS_LIBS = ['libopus-0.x86.dll', 'libopus-0.x64.dll',
              'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
 
-bot = commands.Bot(command_prefix='-')
-
 send_Resume = ""
-nest_asyncio.apply()
 
 def load_opus_lib(opus_libs=OPUS_LIBS):
     if opus.is_loaded():
@@ -82,14 +81,9 @@ class YTDLSource(discord.PCMVolumeTransformer):
 		# YTDL info dicts (data) have other useful information you might want
 		# https://github.com/rg3/youtube-dl/blob/master/README.md
 
-	def __getitem__(self, item: str):
-		"""Allows us to access attributes similar to a dict.
-		This is only useful when you are NOT downloading.
-		"""
-		return self.__getattribute__(item)
-
 	@classmethod
 	async def create_source(cls, ctx, search: str, *, loop, download=False):
+		print(str(download))
 		loop = loop or asyncio.get_event_loop()
 
 		to_run = partial(ytdl.extract_info, url=search, download=download)
