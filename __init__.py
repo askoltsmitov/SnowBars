@@ -82,7 +82,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
 		# https://github.com/rg3/youtube-dl/blob/master/README.md
 
 	@classmethod
-	async def create_source(cls, ctx, search: str, *, loop, download=False):
+	async def create_source(cls, ctx, search: str, *, loop, download):
 		loop = loop or asyncio.get_event_loop()
 
 		to_run = partial(ytdl.extract_info, url=search, download=download)
@@ -94,10 +94,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
 		await ctx.send(f'```ini\n[{data["title"]}] - добавлена в очередь\n```', delete_after=15)
 
-		if download:
-			source = ytdl.prepare_filename(data)
-		else:
-			return {'webpage_url': data['webpage_url'], 'requester': ctx.author.name, 'title': data['title']}
+		source = ytdl.prepare_filename(data)
 
 		return cls(discord.FFmpegPCMAudio(source), data=data, requester=ctx.author.name)
 
