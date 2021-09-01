@@ -183,7 +183,8 @@ class MusicPlayer:
 			except discord.HTTPException:
 				pass
 
-			pathSong = os.path.join("/app/downloads", str(source.duration))
+			pathSong = os.path.join("/downloads", str(source.duration))
+			print(pathSong)
 			try:
 				os.remove(pathSong)
 			except OSError:
