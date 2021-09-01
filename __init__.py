@@ -310,6 +310,7 @@ class Music(commands.Cog):
 			source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=True)
 			print(source.duration)
 			pathSong = os.path.join("/app/downloads", str(source.duration))
+			print(os.getcwd())
 
 			await player.queue.put(source)
 
