@@ -183,6 +183,7 @@ class MusicPlayer:
 			pathSong = os.path.join("/app", str(source.duration))
 			try:
 				os.remove(pathSong)
+				print("File is delete.")
 			except OSError:
 				print("File not exist.")
 
