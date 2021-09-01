@@ -21,6 +21,7 @@ OPUS_LIBS = ['libopus-0.x86.dll', 'libopus-0.x64.dll',
              'libopus-0.dll', 'libopus.so.0', 'libopus.0.dylib']
 
 send_Resume = ""
+pathSong = ""
 
 def load_opus_lib(opus_libs=OPUS_LIBS):
     if opus.is_loaded():
@@ -359,7 +360,6 @@ class Music(commands.Cog):
 			vc.stop()
 			await ctx.send(f'**{ctx.author.name}**: Не хочет эту песню!', delete_after=15)
 
-			pathSong = os.path.join("/app/downloads", str(vc.source.duration))
 			try:
 				os.remove(pathSong)
 			except OSError:
