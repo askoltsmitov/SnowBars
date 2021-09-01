@@ -180,7 +180,7 @@ class MusicPlayer:
 			except discord.HTTPException:
 				pass
 
-			pathSong = os.path.join("/downloads", str(source.duration))
+			pathSong = os.path.join("/app", str(source.duration))
 			print(pathSong)
 			try:
 				os.remove(pathSong)
@@ -306,7 +306,7 @@ class Music(commands.Cog):
 			# If download is True, source will be a discord.FFmpegPCMAudio with a VolumeTransformer.
 			source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=True)
 			print(source.duration)
-			pathSong = os.path.join("/app/downloads", str(source.duration))
+			pathSong = os.path.join("/app/", str(source.duration))
 			print(os.getcwd())
 
 			await player.queue.put(source)
@@ -463,67 +463,6 @@ class Mute(commands.Cog):
 		'''Кик из Voice канала'''
 		await ctx.message.delete()
 		await member.edit(voice_channel = None)
-
-	# <--- Shelby Command --->
-	@commands.command(name='shelby')
-	async def shelby(self, ctx):
-		await ctx.message.delete()
-		
-		player = ovw.get_player(os.getenv('OVW_NAME'))
-
-		tank = player.competitive_tank
-		heal = player.competitive_support
-
-		with open('Calibration.txt', 'r') as file:
-			words = file.readlines()
-			words = [s.strip("\n") for s in words]
-
-		word = random.choice(words)
-
-		if tank == False:
-			tank = "**Танк** − ***" + word + " в калибровке*** :wink:\n"
-		elif tank >= 2700:
-			tank = "**Танк** − ***" + str(tank) + ":***   :x::o:**DemiGOD**:100:\n"
-		elif tank >= 2600:
-			tank = "**Танк** − ***" + str(tank) + ":***   **Почти cyberКотлета** :smirk_cat:\n"
-		elif tank >= 2500:
-			tank = "**Танк** − ***" + str(tank) + ":***   :tada:**Congratulation!** :tada:\n"
-		elif tank >= 2400:
-			tank = "**Танк** − ***" + str(tank) + ":***   **На законном** :woozy_face:\n"
-		elif tank >= 2300:
-			tank = "**Танк** − ***" + str(tank) + ":***   **Не тильтуй** :man_student:\n"
-		elif tank >= 2200:
-			tank = "**Танк** − ***" + str(tank) + ":***   **Wake the fucking Up Samurai** :japanese_goblin:\n"
-		elif tank >= 2100:
-			tank = "**Танк** − ***" + str(tank) + ":***   **Are you trying?** :man_facepalming:\n"
-		elif tank >= 2000:
-			tank = "**Танк** − ***" + str(tank) + ":***   **Дно пробито** :poop:\n"
-		else:
-			tank = "**Танк** − ***" + str(tank) + ":***   **Найди что-нибудь другое, это не твоё** :mad:\n"
-
-		if heal == False:
-			heal = "**Хилер** − ***" + word + " в калибровке*** :wink:"
-		elif heal >= 2700:
-			heal = "**Хилер** − ***" + str(heal) + ":***   :x::o:**DemiGOD**:100:"
-		elif heal >= 2600:
-			heal = "**Хилер** − ***" + str(heal) + ":***   **Почти cyberКотлета** :smirk_cat:"
-		elif heal >= 2500:
-			heal = "**Хилер** − ***" + str(heal) + ":***   :tada:**Congratulation!** :tada:"
-		elif heal >= 2400:
-			heal = "**Хилер** − ***" + str(heal) + ":***   **На законном** :woozy_face:"
-		elif heal >= 2300:
-			heal = "**Хилер** − ***" + str(heal) + ":***   **Не тильтуй** :man_student:"
-		elif heal >= 2200:
-			heal = "**Хилер** − ***" + str(heal) + ":***   **Wake the fucking Up Samurai** :japanese_goblin:"
-		elif heal >= 2100:
-			heal = "**Хилер** − ***" + str(heal) + ":***   **Are you trying?** :man_facepalming:"
-		elif heal >= 2000:
-			heal = "**Хилер** − ***" + str(heal) + ":***   **Дно пробито** :poop:"
-		else:
-			heal = "**Хилер** − ***" + str(heal) + ":***   **Найди что-нибудь другое, это не твоё** :mad:"
-		
-		channel = bot.get_channel(199459074243297280)
-		await channel.send(tank + heal)
 
 bot.add_cog(Music(bot))
 bot.add_cog(Mute(bot))
