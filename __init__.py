@@ -308,6 +308,7 @@ class Music(commands.Cog):
 			print(source.duration)
 			pathSong = os.path.join("/app/", str(source.duration))
 			print(os.getcwd())
+			print(os.listdir())
 
 			await player.queue.put(source)
 
