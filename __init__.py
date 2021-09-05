@@ -39,8 +39,8 @@ def load_opus_lib(opus_libs=OPUS_LIBS):
 load_opus_lib()
 
 ytdlopts = {
-	'username:': os.getenv('login')
-	'password:': os.getenv('pass')
+	'username:': os.getenv('login'),
+	'password:': os.getenv('pass'),
 	'format': 'bestaudio/best',
 	'outtmpl': '%(duration)s',
 	'restrictfilenames': True,
