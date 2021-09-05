@@ -39,6 +39,8 @@ def load_opus_lib(opus_libs=OPUS_LIBS):
 load_opus_lib()
 
 ytdlopts = {
+	'username:': os.getenv('login')
+	'password:': os.getenv('pass')
 	'format': 'bestaudio/best',
 	'outtmpl': '%(duration)s',
 	'restrictfilenames': True,
@@ -181,7 +183,6 @@ class MusicPlayer:
 				pass
 
 			pathSong = os.path.join("/app", str(source.duration))
-			print(os.path.getsize(pathSong) // 1048576)
 			try:
 				os.remove(pathSong)
 			except OSError:
@@ -306,7 +307,6 @@ class Music(commands.Cog):
 			# If download is True, source will be a discord.FFmpegPCMAudio with a VolumeTransformer.
 			source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=True)
 			pathSong = os.path.join("/app/", str(source.duration))
-			print(os.listdir())
 
 			await player.queue.put(source)
 
