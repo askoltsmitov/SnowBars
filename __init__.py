@@ -181,6 +181,7 @@ class MusicPlayer:
 				pass
 
 			pathSong = os.path.join("/app", str(source.duration))
+			print(os.path.getsize(pathSong) // 1048576)
 			try:
 				os.remove(pathSong)
 			except OSError:
